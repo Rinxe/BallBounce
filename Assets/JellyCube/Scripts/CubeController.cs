@@ -15,6 +15,7 @@ namespace JellyCube
 
         public Collider m_Cube;
         public GameObject m_VFX;
+        public float m_IncVFXPosY=.5f; 
         public enum MovementType
         {
             Roll,
@@ -81,10 +82,13 @@ namespace JellyCube
 
             if (Physics.Linecast(origin, origin + dir, out outHit))
             {
-
-                GameObject vfx = Instantiate(m_VFX, outHit.point, Quaternion.identity);
-
-                DestroyGameOBJ(vfx);
+                if(m_VFX) {
+                    GameObject vfx = Instantiate(m_VFX,
+                        new Vector3(outHit.point.x, outHit.point.y+ m_IncVFXPosY, outHit.point.z),
+                            Quaternion.identity);
+                    StartCoroutine(DestroyGameOBJ(vfx));
+                }
+            
 
                CubeController cubeCollider = outHit.transform.gameObject.GetComponent<CubeController>();
 
@@ -205,7 +209,14 @@ namespace JellyCube
 
                 if (cube != null)
                 {
-                    if (cube.m_CanBePushed)
+                    if(m_VFX) {
+                        GameObject vfx = Instantiate(m_VFX,
+                            new Vector3(outHit.point.x, outHit.point.y + m_IncVFXPosY, outHit.point.z),
+                                Quaternion.identity);
+                        StartCoroutine(DestroyGameOBJ(vfx));
+                    }
+
+                    if(cube.m_CanBePushed)
                     {
                         didPush = cube.DoMove(dir);
                     }

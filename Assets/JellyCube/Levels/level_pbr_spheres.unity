@@ -2059,6 +2059,10 @@ PrefabInstance:
       propertyPath: m_Trails
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 11430810, guid: ca5a343231c97c24ea0dbfcd84d43cb4, type: 3}
+      propertyPath: m_IncVFXPosY
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
